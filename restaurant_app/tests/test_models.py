@@ -6,19 +6,18 @@ from PIL import Image
 import io
 
 @pytest.fixture
-@pytest.mark.django_db  # This marks the fixture as needing database access
+@pytest.mark.django_db 
 def user():
     return get_user_model().objects.create_user(username='testuser', email='test@example.com', password='password')
 
 
 @pytest.fixture
-@pytest.mark.django_db  # This marks the fixture as needing database access
+@pytest.mark.django_db 
 def food_item():
-    # Create a small image in memory
-    image = Image.new('RGB', (100, 100), color='blue')  # Create a blue image (100x100 pixels)
+    image = Image.new('RGB', (100, 100), color='blue')  
     image_file = io.BytesIO()
     image.save(image_file, format='JPEG')
-    image_file.seek(0)  # Reset pointer to the start of the image
+    image_file.seek(0) 
 
     return FoodItem.objects.create(
         name="Pizza",
@@ -28,11 +27,8 @@ def food_item():
         image=SimpleUploadedFile("test_image.jpg", image_file.read(), content_type="image/jpeg")
     )
 
-# def test_user_save(user):
-#     user.save()
-#     assert user.profile_picture is not None
 
-@pytest.mark.django_db  # Mark the test that interacts with the database
+@pytest.mark.django_db 
 def test_user_save(user):
     user.save()
     assert user.username == 'testuser'

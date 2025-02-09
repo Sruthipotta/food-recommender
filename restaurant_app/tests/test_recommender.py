@@ -34,7 +34,7 @@ def recommender(user, food_item):
     OrderItem.objects.create(order=order, food_item=food_item, quantity=1, price=food_item.price)
     return RestaurantRecommender(user=user, Order=Order, OrderItem=OrderItem, FoodItem=FoodItem)
 
-@pytest.mark.django_db  # Ensure that the test has database access
+@pytest.mark.django_db 
 def test_collaborative_filtering(recommender):
     # Get the User model dynamically
     User = get_user_model()

@@ -9,7 +9,7 @@ from PIL import Image
 import io
 
 @pytest.fixture
-@pytest.mark.django_db  # This marks the fixture as needing database access
+@pytest.mark.django_db 
 def user_data():
     return {
         "username": "testuser",
@@ -18,13 +18,13 @@ def user_data():
     }
 
 @pytest.fixture
-@pytest.mark.django_db  # This marks the fixture as needing database access
+@pytest.mark.django_db 
 def food_item_data():
     # Create a small image in memory
     image = Image.new('RGB', (100, 100), color='blue')  # Create a blue image (100x100 pixels)
     image_file = io.BytesIO()
     image.save(image_file, format='JPEG')
-    image_file.seek(0)  # Reset pointer to the start of the image
+    image_file.seek(0) 
     return {
         "name": "Pizza",
         "description": "Delicious cheese pizza",
@@ -33,7 +33,7 @@ def food_item_data():
         "image": SimpleUploadedFile("test_image.jpg", image_file.read(), content_type="image/jpeg")
     }
 
-@pytest.mark.django_db  # Marking the test function for database access
+@pytest.mark.django_db 
 def test_user_serializer_create(user_data):
     serializer = UserSerializer(data=user_data)
     assert serializer.is_valid()
@@ -41,7 +41,7 @@ def test_user_serializer_create(user_data):
     assert user.username == user_data["username"]
     assert user.email == user_data["email"]
 
-@pytest.mark.django_db  # Marking the test function for database access
+@pytest.mark.django_db 
 def test_food_item_serializer_create(food_item_data):
     serializer = FoodItemSerializer(data=food_item_data)
     assert serializer.is_valid()

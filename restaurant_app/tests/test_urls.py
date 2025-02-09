@@ -7,19 +7,19 @@ from rest_framework.test import APIClient
 def client():
     return APIClient()
 
-@pytest.mark.django_db  # Marking the test function to use database
+@pytest.mark.django_db  
 def test_register_url(client):
-    url = reverse('register')  # Ensure this is the correct URL pattern name for registration
+    url = reverse('register') 
     response = client.post(url, {"username": "test", "email": "test@example.com", "password": "password"})
     assert response.status_code == status.HTTP_201_CREATED
 
-@pytest.mark.django_db  # Marking the test function to use database
+@pytest.mark.django_db  
 def test_login_url(client):
     # Create the user first, as login needs the user to be present in the database
     # Ensure the user is created before attempting to log in
-    url_register = reverse('register')  # Make sure this is the correct URL for registration
+    url_register = reverse('register')  
     client.post(url_register, {"username": "test", "email": "test@example.com", "password": "password"})
     
-    url_login = reverse('token_obtain_pair')  # Ensure this is the correct URL for obtaining a token
+    url_login = reverse('token_obtain_pair')
     response = client.post(url_login, {"username": "test", "password": "password"})
     assert response.status_code == status.HTTP_200_OK
