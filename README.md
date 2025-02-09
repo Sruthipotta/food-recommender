@@ -73,6 +73,13 @@ python manage.py runserver
 The server will be available at http://localhost:8000/.
 
 
+## Build Docker image if you need
+```bash
+docker build -t food-recommendation .
+docker run -p 8000:8000 food-recommendation
+```
+
+
 ## Accessing the API Documentation
 
 1.  **Log in to Django Admin**:  
