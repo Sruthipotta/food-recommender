@@ -4,13 +4,11 @@ from .utils import process_image
 
 
 def food_image_upload_path(instance, filename):
-    """Generate file path for food images."""
     ext = filename.split('.')[-1]
     return f'food_items/{instance.name}_{instance.id}.{ext}'
 
 
 def profile_picture_upload_path(instance, filename):
-    """Generate file path for profile pictures."""
     ext = filename.split('.')[-1]
     return f'profile_pictures/{instance.username}_{instance.id}.{ext}'
 
@@ -32,9 +30,9 @@ class User(AbstractUser):
             # Process the profile picture before saving
             processed_image = process_image(self.profile_picture)
             self.profile_picture.save(
-                self.profile_picture.name,  # Use the same filename
-                processed_image,  # Pass the processed image
-                save=False  # Avoid saving the model again
+                self.profile_picture.name, 
+                processed_image, 
+                save=False
             )
         super().save(*args, **kwargs)
 
@@ -51,12 +49,11 @@ class FoodItem(models.Model):
 
     def save(self, *args, **kwargs):
         if self.image:
-            # Process food image before saving
             processed_food_image = process_image(self.image)
             self.image.save(
-                self.image.name,  # Use the same filename
-                processed_food_image,  # Pass the processed image
-                save=False  # Avoid saving the model again
+                self.image.name, 
+                processed_food_image, 
+                save=False
             )
         super().save(*args, **kwargs)
 

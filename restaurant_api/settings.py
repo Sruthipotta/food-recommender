@@ -39,13 +39,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'restaurant_api.urls'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 
 DATABASES = {
     'default': {
@@ -81,8 +74,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Optional: Add template directories
-        'APP_DIRS': True,  # Enable template discovery in installed apps
+        'DIRS': [os.path.join(BASE_DIR, 'templates')], 
+        'APP_DIRS': True, 
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -94,11 +87,9 @@ TEMPLATES = [
     },
 ]
 
-# settings.py
 
 STATIC_URL = '/static/'
 
-# Optional: Custom location for static files
 STATICFILES_DIRS = [
     # BASE_DIR / "static",
 ]

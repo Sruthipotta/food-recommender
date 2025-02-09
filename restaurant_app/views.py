@@ -18,14 +18,11 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = [AllowAny]
 
     def perform_create(self, serializer):
-        # Save the user with the default role of 'customer'
         user = serializer.save(role='customer')
 
-        # If a profile picture is uploaded, process and save it
         profile_picture = self.request.FILES.get('profile_picture')
         if profile_picture:
             user.profile_picture = profile_picture
-            # Process the image if needed (optional)
             processed_image = process_image(profile_picture)
             user.profile_picture.save(user.profile_picture.name, processed_image, save=True)
         
@@ -81,23 +78,6 @@ class OrderViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(customer=self.request.user)
-
-# class RecommendationView(generics.ListAPIView):
-#     permission_classes = [IsAuthenticated]
-#     serializer_class = FoodItemSerializer
-
-#     def get_queryset(self):
-#         user = self.request.user
-#         if user.role != 'customer':
-#             return FoodItem.objects.none()
-
-#         from .utils import generate_recommendations
-#         return generate_recommendations(
-#             user=user,
-#             FoodItem=FoodItem,
-#             OrderItem=OrderItem,
-#             Order=Order
-#         )
 
 
 class RecommendationView(generics.ListAPIView):

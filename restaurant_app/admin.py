@@ -37,7 +37,6 @@ class CustomUserAdmin(UserAdmin):
     display_profile_picture.short_description = 'Profile Picture'
 
 
-# restaurant_app/admin.py
 
 from django.contrib import admin
 from .models import FoodItem
@@ -116,7 +115,7 @@ class OrderAdmin(admin.ModelAdmin):
     )
 
     def get_readonly_fields(self, request, obj=None):
-        if obj:  # editing an existing object
+        if obj:  
             return self.readonly_fields + ('customer', 'created_at', 'updated_at')
         return self.readonly_fields
 
@@ -129,4 +128,4 @@ class OrderItemAdmin(admin.ModelAdmin):
     readonly_fields = ('price',)
 
     def has_add_permission(self, request):
-        return False  # Prevent adding order items directly - they should be added through orders
+        return False 
