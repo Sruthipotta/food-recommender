@@ -7,7 +7,7 @@ This guide will walk you through the steps to set up and run this Django applica
 ## Prerequisites
 
 Before you begin, ensure you have the following installed:
-- Python 3.x
+- Python 3.12
 - Git
 - Virtualenv (optional but recommended)
 
